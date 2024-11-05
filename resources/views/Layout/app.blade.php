@@ -30,7 +30,7 @@
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Standard Bima</span></a>
+            <a href="{{route('admin.dash')}}" class="site_title"><i class="fa fa-paw"></i> <span>Standard Bima</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -42,7 +42,7 @@
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Ravi</h2>
+              <h2>{{ ucfirst(Auth::user()->name) }}</h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -52,7 +52,7 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <!-- <h3>General</h3> -->
               <ul class="nav side-menu">
 
               <li><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> Users</a>
@@ -185,7 +185,7 @@
             <ul class=" navbar-right">
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                  <img src="{{asset('images/img.jpg')}}" alt="">John Doe
+                  <img src="{{asset('images/img.jpg')}}" alt="">{{ ucfirst(Auth::user()->name) }}
                 </a>
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="javascript:;"> Profile</a>
