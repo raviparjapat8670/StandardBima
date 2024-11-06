@@ -18,6 +18,11 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+
+        if (Auth::check()) {
+            // If logged in, continue with the Dashboard
+            return redirect()->route('admin.dash');
+        }
         // If the request is a POST request, handle the form submission
         if ($request->isMethod('post')) {
             // Validate the request using the UserLoginRequest

@@ -30,14 +30,16 @@
 
     <div class="login_wrapper">
       <div class="animate form login_form">
+ 
         <section class="login_content">
-          <form method="POST" action="{{route('admin.login')}}">
-          @csrf
-          @if ($errors->has('error'))
+        @if ($errors->has('error'))
             <p class="text-danger">
               {{ $errors->first('error') }}
             </p>
             @endif 
+          <form method="POST" action="{{route('admin.login')}}">
+          @csrf
+       
 
             <h1>Admin</h1>
             <div class="form-group">
