@@ -3,17 +3,31 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\user\GetUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\admin\UserService;
+
 
 class UserController extends Controller
 {
     //
 
-    public function index()
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    public function index(GetUserRequest $request)
     {
 
-        return view('admin.users.index');
+        $validated = $request->validated();
+        // Retrieve the list of users from the UserService
+        $users = $this->userService->getUsers($validated);
+
+        return view('admin.users.index', compact('users'));
     }
 
     public function login(Request $request)

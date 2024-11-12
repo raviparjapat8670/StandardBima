@@ -1,5 +1,8 @@
 @extends('layout.app')
+
 @section('content')
+<style>
+    </style>
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -12,7 +15,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">Go!</button>
+                            <]button class="btn btn-secondary" type="button">Go!</>
                         </span>
                     </div>
                 </div>
@@ -51,33 +54,30 @@
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Salary</th>
+                                                    <th>Role</th>
+                                                    <th>Email</th>
+                                                    <th>Mobile</th>
+                                                    <th>created at</th>
+                                                    <th>Action</th>
+
+
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($users as $user)
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td>$320,800</td>
+                                                    <td>{{$user->name}}</td>
+                                                    <td>{{$user->role}}</td>
+                                                    <td>{{$user->email}}</td>
+                                                    <td>{{$user->mobile}}</td>
+                                                    <td>{{$user->created_at}}</td>
+
                                                 </tr>
-                                       
-                                                <tr>
-                                                    <td>Donna Snider</td>
-                                                    <td>Customer Support</td>
-                                                    <td>New York</td>
-                                                    <td>27</td>
-                                                    <td>2011/01/25</td>
-                                                    <td>$112,000</td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
+                                           
                                         </table>
+                                        {{ $users->links('admin.pagination.custom') }}
                                     </div>
                                 </div>
                             </div>
