@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('role')->nullable();
+            $table->string('fname')->nullable();
+            $table->string('lname')->nullable();
+            $table->string('role')->nullable()->comment("superadmin, manager, staff");
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('gender')->nullable();
             $table->longText('permission')->nullable();
-            $table->string('password');
-            $table->timestamp('moile_verified_at')->nullable();
+            $table->string('password')->nullable();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -38,10 +40,12 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-        Schema::create('user_logs', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('user_activity_logs', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->nullable()->index();
-            $table->string('message', 45)->nullable();
+            $table->string('activity_type')->nullable();
+            $table->string('activity_id')->nullable();
+            $table->string('message', 200)->nullable();
             $table->timestamps();
         });
     }

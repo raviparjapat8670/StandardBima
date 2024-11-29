@@ -2,15 +2,20 @@
 
 @section('content')
 <style>
-    </style>
-<div class="right_col" role="main">
-    <div class="">
-        <div class="page-title">
-            <div class="title_left">
-                <h3>Users</h3>
-            </div>
+</style>
 
-            <!-- <div class="title_right">
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Users</h3>
+    </div>
+    <div class="title_right">
+        <a href="{{route('admin.add-user')}}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Add New User"><i class="fa fa-plus-circle"></i></a>
+
+
+    </div>
+
+    <!-- <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for...">
@@ -20,80 +25,66 @@
                     </div>
                 </div>
             </div> -->
-        </div>
+</div>
 
-        <div class="clearfix"></div>
+<div class="clearfix"></div>
 
-        <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
-                    <!-- <div class="x_title">
-                    <h2>Default Example <small>Users</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div> -->
-                    <div class="x_content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card-box table-responsive">
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="row">
 
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Role</th>
-                                                    <th>Email</th>
-                                                    <th>Mobile</th>
-                                                    <th>created at</th>
-                                                    <th>Action</th>
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>created at</th>
+                                            <th>Action</th>
 
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($users as $user)
-                                                <tr>
-                                                    <td>{{$user->name}}</td>
-                                                    <td>{{$user->role}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td>{{$user->mobile}}</td>
-                                                    <td>{{$user->created_at}}</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($users as $user)
+                                        <tr>
+                                            <td>{{$user->fname}} {{$user->lname}}</td>
+                                            <td>{{$user->role}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->mobile}}</td>
+                                            <td>{{$user->created_at}}</td>
+                                            <td> <a href="{{route('admin.edit-user',Crypt::encrypt($user->id))}}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a></td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
 
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                           
-                                        </table>
-                                        {{ $users->links('admin.pagination.custom') }}
-                                    </div>
-                                </div>
+                                </table>
+                                {{ $users->links('admin.pagination.custom') }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
         </div>
     </div>
+
+
+
+
+
+
 </div>
+
+
 
 @endsection
 

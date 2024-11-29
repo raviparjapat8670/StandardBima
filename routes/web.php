@@ -16,6 +16,9 @@ Route::middleware([CheckLoggedIn::class])->group(function () {
 // admin routes start here
 Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+    Route::match(['get','post'],'/add-user', [UserController::class, 'CreateUser'])->name('admin.add-user');
+    Route::match(['get','post'],'/edit-user/{id?}', [UserController::class, 'EditUser'])->name('admin.edit-user');
+
     Route::get('/dash', [DashboardController::class, 'index'])->name('admin.dash');
     Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
 

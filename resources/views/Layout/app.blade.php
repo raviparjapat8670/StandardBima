@@ -42,7 +42,7 @@
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>{{ ucfirst(Auth::user()->name) }}</h2>
+              <h2>{{ ucfirst(Auth::user()->fname) }}</h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -55,8 +55,9 @@
               <!-- <h3>General</h3> -->
               <ul class="nav side-menu">
 
-              <li><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> Users</a>
+                <li><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> Users</a>
                 </li>
+               
                 <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="index.html">Dashboard</a></li>
@@ -266,10 +267,21 @@
           </nav>
         </div>
       </div>
-      <!-- /top navigation -->
+      <div class="right_col" role="main">
+        @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div>
+        @elseif(session('error'))
+        <div class="alert alert-danger">
+          {{ session('error') }}
+        </div>
+        @endif
+        <!-- /top navigation -->
 
-      <!-- page content -->
-      @yield('content')
+        <!-- page content -->
+        @yield('content')
+      </div>
 
       <!-- /page content -->
 

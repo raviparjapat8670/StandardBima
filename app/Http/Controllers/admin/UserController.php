@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\user\CreateUserRequest;
+use App\Http\Requests\admin\user\EditUserRequest;
+use App\Http\Requests\admin\user\GetUserPermissionRequest;
 use App\Http\Requests\admin\user\GetUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\admin\UserService;
+use Illuminate\Support\Facades\Crypt;
 
 
 class UserController extends Controller
@@ -26,9 +30,68 @@ class UserController extends Controller
         $validated = $request->validated();
         // Retrieve the list of users from the UserService
         $users = $this->userService->getUsers($validated);
-
         return view('admin.users.index', compact('users'));
     }
+
+
+    public function CreateUser(CreateUserRequest $request)
+    {
+
+        if ($request->isMethod('get')) {
+            $permissions = config('permissions');
+            // For GET request: Show the form
+            return view('admin.users.create',compact('permissions'));  // This is your form view
+        }
+
+
+        // Use the CreateUserRequest only for POST requests
+        $validated = $request->validated(); // Manually validate on POST request
+        $validated['permissions']= $request->input('permissions');
+
+        // Retrieve the cretaed of user from the UserService
+        $users = $this->userService->CreateUser($validated);
+
+        if ($users) {
+            session()->flash('success', 'User has been created successfully.');
+            return redirect()->route('admin.users');
+        }
+
+        session()->flash('error', 'Sorry something went wrong! Please try again later.');
+        return redirect()->route('admin.users');
+    }
+
+
+    // Show user details or edit the user
+    public function EditUser(EditUserRequest $request, $id)
+    {
+        if ($request->isMethod('get')) {
+            // Decrypt the ID
+            $id = Crypt::decrypt($id);
+            $permissions = config('permissions');
+            $user = $this->userService->getUserById($id); // Get the user or throw 404 if not found
+            $user->permission=json_decode($user->permission);
+            // If the request is GET, display the user details with the edit form
+            return view('admin.users.edit', compact('user','permissions'));
+        }
+
+        // If the request is POST, update the user details
+        $validated = $request->validated(); // Manually validate on POST request
+        // Update the user
+
+        $validated['id'] = $request->input('id');
+        $validated['permissions']= $request->input('permissions');
+        // Retrieve the edit of user from the UserService
+        $user = $this->userService->EditUser($validated);
+        if ($user) {
+            // Redirect back to the user details page with a success message
+            session()->flash('success', 'User details updated successfully.');
+            return redirect()->route('admin.users');
+        }
+        // Redirect back to the user details page with a error message
+        session()->flash('error', 'Sorry something went wrong! Please try again later.');
+        return redirect()->route('admin.users');
+    }
+
 
     public function login(Request $request)
     {
