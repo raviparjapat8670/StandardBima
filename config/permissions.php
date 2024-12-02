@@ -2,19 +2,26 @@
 
 return [
     'users' => [
-        "1"=>"User List",
-        "2"=>"User Add",
-        "3"=>"User Edit"
+        "1"=>"List",
+        "2"=>"Add",
+        "3"=>"Edit",
+        "4"=>"Delete"
+
     ],
     'state' => [
-        "1"=>"State List",
-        "2"=>"State Add",
-        "3"=>"State Edit"
+        "1"=>"List",
+        "2"=>"Add",
+        "3"=>"Edit",
+        "4"=>"Delete"
+
     ],
     'city' => [
-        "1"=>"City List",
-        "2"=>"City Add",
-        "3"=>"City Edit"
+        "1"=>"List",
+        "2"=>"Add",
+        "3"=>"Edit",
+        "4"=>"Delete",
+
+
     ],
     // Add more permissions as needed...
 ];

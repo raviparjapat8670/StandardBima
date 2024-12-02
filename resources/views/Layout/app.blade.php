@@ -57,6 +57,8 @@
 
                 <li><a href="{{route('admin.users')}}"><i class="fa fa-user"></i> Users</a>
                 </li>
+                <li><a href="{{route('admin.occupations')}}"><i class="fa fa-money"></i> Occupations</a>
+                </li>
                
                 <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">

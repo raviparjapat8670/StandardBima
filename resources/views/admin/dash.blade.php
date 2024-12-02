@@ -1,6 +1,6 @@
 @extends('layout.app')
 @section('content')
-<div class="right_col" role="main">
+<!-- <div class="right_col" role="main"> -->
     <div class="">
         <div class="row" style="display: inline-block;">
             <div class="top_tiles">
@@ -447,7 +447,7 @@
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
 @endsection
 @push('page_css')
 <!-- bootstrap-daterangepicker -->

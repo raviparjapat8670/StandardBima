@@ -5,104 +5,45 @@
 </style>
 <div class="page-title">
     <div class="title_left">
-        <h4>Edit User, {{$user->fname}}</h4>
+        <h4>Edit Occupation, {{$occupation->title}}</h4>
     </div>
 
     <div class="x_panel">
 
         <div class="x_content">
             <br />
-            <form class="form-label-left input_mask" method="POST" action="{{ route('admin.edit-user', $user->id) }}">
+            <form class="form-label-left input_mask" method="POST" action="{{ route('admin.edit-occupation', $occupation->id) }}">
                 @csrf <!-- CSRF token for security -->
                 <div class="col-md-6 col-sm-6  form-group has-feedback">
-                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="fname" value="{{ old('fname', $user->fname) }}" placeholder="First Name">
-                    <input type="hidden" name="id" value="{{$user->id}}">
+                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="title" value="{{ old('title', $occupation->title) }}" placeholder="Title">
+                    <input type="hidden" name="id" value="{{$occupation->id}}">
 
                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                    @error('fname')
+                    @error('title')
                     <div class="text-red">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="col-md-6 col-sm-6  form-group has-feedback">
-                    <input type="text" class="form-control" id="inputSuccess3" name="lname" value="{{ old('lname', $user->lname) }}" placeholder="Last Name">
-                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                    @error('lname')
-                    <div class="text-red">{{ $message }}</div>
-                    @enderror
-                </div>
-
-
+               
                 <div class="form-group row">
 
-                    <label class="control-label col-md-3 col-sm-3 ">Gender</label>
+                    <label class="control-label col-md-3 col-sm-3 ">Status</label>
                     <div class="col-md-9 col-sm-9 ">
-                        <select class="select2_group form-control" name="gender">
-                            <optgroup label="Select Gender">
-                                <option value="male" {{ old('gender', $user->gender ?? '') == 'male' ? 'selected' : '' }}>Male</option>
-                                <option value="female" {{ old('gender', $user->gender ?? '') == 'female' ? 'selected' : '' }}>Female</option>
-                                <option value="other" {{ old('gender', $user->gender ?? '') == 'other' ? 'selected' : '' }}>Other</option>
+                        <select class="select2_group form-control" name="status">
+                            <optgroup label="Select Status">
+                                <option value="1" {{ old('status', $occupation->status ?? '') == '1' ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ old('status', $occupation->status ?? '') == '0' ? 'selected' : '' }}>Deactive</option>
 
                             </optgroup>
 
                         </select>
                     </div>
-                    @error('gender')
+                    @error('status')
                     <div class="text-red">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="form-group row">
-
-                    <label class="control-label col-md-3 col-sm-3 ">Role</label>
-                    <div class="col-md-9 col-sm-9 ">
-                        <select class="select2_group form-control" name="role">
-                            <optgroup label="Select Role">
-                                <option value="superadmin" {{ old('role', $user->role ?? '') == 'superadmin' ? 'selected' : '' }}>Superadmin</option>
-                                <option value="manager" {{ old('role', $user->role ?? '') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                <option value="staff" {{ old('role', $user->role ?? '') == 'staff' ? 'selected' : '' }}>Staff</option>
-
-                            </optgroup>
-
-                        </select>
-                    </div>
-                    @error('role')
-                    <div class="text-red">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class=" card">
-                <div class="card-header">
-                            <strong>Permissions</strong>
-                        </div>
-                    <div class=" row">
-
-
-                        @foreach ($permissions as $key=>$permission)
-
-                        <div class="col-md-2">
-
-                            <div class="card-body">
-                                <h6 style="text-align:left;">
-                                    <strong>{{ ucfirst($key) }}</strong>
-                                </h6>
-                                @foreach ($permission as $subkey => $subpermission)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="permissions[{{$key}}][]" id="permission-{{$key}}-{{ $subkey }}" value="{{ $subkey }}"
-                                   @if(!empty($user->permission) && in_array($subkey, $user->permission->$key)) checked @endif >
-                                    <label class="form-check-label" for="permission-{{$key}}-{{ $subkey }}">
-                                        {{ $subpermission }}
-                                    </label>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-
-                        @endforeach
-                    </div>
-
-                </div>
-        </div>
+    
 
 
                 <!-- <div class="form-group row">

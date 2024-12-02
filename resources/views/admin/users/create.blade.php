@@ -83,7 +83,7 @@
                     <div class="text-red">{{ $message }}</div>
                     @enderror
                 </div>
-                {{-- @if(in_array($permission->id, $userPermissions)) checked @endif --}}
+               
                 <div class=" card">
                 <div class="card-header">
                             <strong>Permissions</strong>
