@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\OccupationController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\TestController;
 use App\Http\Middleware\CheckLoggedIn;
+use App\Http\Middleware\CheckPermission;
+use App\Models\Occupation;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,15 +19,15 @@ Route::middleware([CheckLoggedIn::class])->group(function () {
         return view('admin.dash');
     });
     Route::prefix('admin')->group(function () {
-        Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-        Route::match(['get', 'post'], '/add-user', [UserController::class, 'CreateUser'])->name('admin.add-user');
-        Route::match(['get', 'post'], '/edit-user/{id?}', [UserController::class, 'EditUser'])->name('admin.edit-user');
+        Route::get('/users', [UserController::class, 'index'])->name('admin.users')->middleware(CheckPermission::class.':list,User');
+        Route::match(['get', 'post'], '/add-user', [UserController::class, 'CreateUser'])->name('admin.add-user')->middleware(CheckPermission::class.':create,User');
+        Route::match(['get', 'post'], '/edit-user/{id?}', [UserController::class, 'EditUser'])->name('admin.edit-user')->middleware(CheckPermission::class.':edit,User');
         Route::get('/dash', [DashboardController::class, 'index'])->name('admin.dash');
         Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
         // occupations start
-        Route::get('/occupations', [OccupationController::class, 'index'])->name('admin.occupations');
-        Route::match(['get', 'post'], '/add-occupation', [OccupationController::class, 'CreateOccupation'])->name('admin.add-occupation');
-        Route::match(['get', 'post'], '/edit-occupation/{id?}', [OccupationController::class, 'EditOccupation'])->name('admin.edit-occupation');
+        Route::get('/occupations', [OccupationController::class, 'index'])->name('admin.occupations')->middleware(CheckPermission::class.':list,Occupation');
+        Route::match(['get', 'post'], '/add-occupation', [OccupationController::class, 'CreateOccupation'])->name('admin.add-occupation')->middleware(CheckPermission::class.':create,Occupation');
+        Route::match(['get', 'post'], '/edit-occupation/{id?}', [OccupationController::class, 'EditOccupation'])->name('admin.edit-occupation')->middleware(CheckPermission::class.':edit,Occupation');
 
         // occutaions end
 

@@ -88,7 +88,7 @@
                                 @foreach ($permission as $subkey => $subpermission)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="permissions[{{$key}}][]" id="permission-{{$key}}-{{ $subkey }}" value="{{ $subkey }}"
-                                   @if(!empty($user->permission) && in_array($subkey, $user->permission->$key)) checked @endif >
+                                   @if(!empty($user->permission) && !empty($user->permission->$key)  && in_array($subkey, $user->permission->$key)) checked @endif >
                                     <label class="form-check-label" for="permission-{{$key}}-{{ $subkey }}">
                                         {{ $subpermission }}
                                     </label>

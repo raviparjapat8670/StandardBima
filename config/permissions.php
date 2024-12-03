@@ -2,24 +2,30 @@
 
 return [
     'users' => [
-        "1"=>"List",
-        "2"=>"Add",
-        "3"=>"Edit",
-        "4"=>"Delete"
+        "list"=>"List",
+        "create"=>"Create",
+        "edit"=>"Edit",
+        "delete"=>"Delete"
 
     ],
-    'state' => [
-        "1"=>"List",
-        "2"=>"Add",
-        "3"=>"Edit",
-        "4"=>"Delete"
+    'occupations' => [
+        "list"=>"List",
+        "create"=>"Create",
+        "edit"=>"Edit",
+        "delete"=>"Delete"
+    ],
+    'states' => [
+        "list"=>"List",
+        "create"=>"Create",
+        "edit"=>"Edit",
+        "delete"=>"Delete"
 
     ],
-    'city' => [
-        "1"=>"List",
-        "2"=>"Add",
-        "3"=>"Edit",
-        "4"=>"Delete",
+    'citys' => [
+        "list"=>"List",
+        "create"=>"Create",
+        "edit"=>"Edit",
+        "delete"=>"Delete"
 
 
     ],
