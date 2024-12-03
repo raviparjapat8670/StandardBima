@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\DocumentationController;
 use App\Http\Controllers\admin\OccupationController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\TestController;
@@ -24,12 +25,20 @@ Route::middleware([CheckLoggedIn::class])->group(function () {
         Route::match(['get', 'post'], '/edit-user/{id?}', [UserController::class, 'EditUser'])->name('admin.edit-user')->middleware(CheckPermission::class.':edit,User');
         Route::get('/dash', [DashboardController::class, 'index'])->name('admin.dash');
         Route::get('/logout', [UserController::class, 'logout'])->name('admin.logout');
+      
+      
         // occupations start
         Route::get('/occupations', [OccupationController::class, 'index'])->name('admin.occupations')->middleware(CheckPermission::class.':list,Occupation');
         Route::match(['get', 'post'], '/add-occupation', [OccupationController::class, 'CreateOccupation'])->name('admin.add-occupation')->middleware(CheckPermission::class.':create,Occupation');
         Route::match(['get', 'post'], '/edit-occupation/{id?}', [OccupationController::class, 'EditOccupation'])->name('admin.edit-occupation')->middleware(CheckPermission::class.':edit,Occupation');
 
         // occutaions end
+
+        // documentation start
+        Route::get('/documentations', [DocumentationController::class, 'index'])->name('admin.documentations')->middleware(CheckPermission::class.':list,Documentation');
+        Route::match(['get', 'post'], '/add-documentation', [DocumentationController::class, 'CreateDocumentation'])->name('admin.add-documentation')->middleware(CheckPermission::class.':create,Documentation');
+        Route::match(['get', 'post'], '/edit-documentation/{id?}', [DocumentationController::class, 'EditDocumentation'])->name('admin.edit-documentation')->middleware(CheckPermission::class.':edit,Documentation');
+        //documentation end
 
 
 

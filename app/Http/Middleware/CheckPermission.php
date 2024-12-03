@@ -19,7 +19,8 @@ class CheckPermission
         $modelClass = 'App\\Models\\' . $model;
         if (!$user->can($action, $modelClass)) {
             // If not authorized, abort with a 403 response
-            return response()->view('admin.errors.403', ['message' => 'Sorry, You Don\'t Have Permission To Access This Page.'], 403);
+            return back()->with('show_modal', true)
+            ->with('message', 'Sorry, You Don\'t Have Permission To Access This Page.');
         
         }
 

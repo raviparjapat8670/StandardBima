@@ -59,6 +59,8 @@
                 </li>
                 <li><a href="{{route('admin.occupations')}}"><i class="fa fa-money"></i> Occupations</a>
                 </li>
+                <li><a href="{{route('admin.documentations')}}"><i class="fa fa-money"></i> Documentations</a>
+                </li>
                
                 <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
@@ -290,6 +292,24 @@
       <!-- footer content -->
       @extends('admin.footer')
       <!-- /footer content -->
+      <div id="errorModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Permission Denied</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage" style="color:red;">{{ $message ?? 'You do not have permission to access this page.' }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
   </div>
 
@@ -307,6 +327,15 @@
   <!-- Custom Theme Scripts -->
   <script src="{{asset('build/js/custom.min.js')}}"></script>
   @stack('page_scripts')
+  <script>
+        @if(session('show_modal'))
+            $(document).ready(function() {
+                // Show the modal with the message
+                $('#errorModal').modal('show');
+            });
+        @endif
+    </script>
+
 </body>
 
 </html>

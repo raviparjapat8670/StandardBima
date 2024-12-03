@@ -30,7 +30,7 @@ class OccupationService
             'user_id' => Auth::user()->id,
             'activity_type' => 'occupation-add',
             'activity_id' => $occupation->id,
-            'message' => "User {$data['title']} has been added.",
+            'message' => "Occupation {$data['title']} has been added.",
         ]);
         return $occupation;
     }

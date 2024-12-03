@@ -16,21 +16,19 @@ use Illuminate\Support\Facades\Crypt;
 
 class OccupationController extends Controller
 {
-    //
-    use AuthorizesRequests;  
-    protected $occupationService;
 
-    public function __construct(OccupationService $occupationService)
+    protected $OccupationService;
+
+    public function __construct(OccupationService $OccupationService)
     {
-        $this->occupationService = $occupationService;
+        $this->OccupationService = $OccupationService;
     }
     public function index(GetOccupationRequest $request)
     {
     
-        $this->authorize('list',Occupation::class);
         $validated = $request->validated();
         // Retrieve the list of users from the UserService
-        $occupations = $this->occupationService->getOccupations($validated);
+        $occupations = $this->OccupationService->getOccupations($validated);
 
         return view('admin.occupations.index', compact('occupations'));
     }
@@ -43,7 +41,7 @@ class OccupationController extends Controller
         // Use the CreateUserRequest only for POST requests
         $validated = $request->validated(); // Manually validate on POST request
         // Retrieve the cretaed of user from the UserService
-        $occupation = $this->occupationService->CreateOccupation($validated);
+        $occupation = $this->OccupationService->CreateOccupation($validated);
 
         if ($occupation) {
             session()->flash('success', 'Occupation has been created successfully.');
@@ -58,9 +56,13 @@ class OccupationController extends Controller
     public function EditOccupation(EditOccupationRequest $request, $id)
     {
         if ($request->isMethod('get')) {
+
+            if (empty($id))
+            return redirect()->route('admin.occupations');
+
             // Decrypt the ID
             $id = Crypt::decrypt($id);
-            $occupation = $this->occupationService->getOccupationById($id); // Get the user or throw 404 if not found
+            $occupation = $this->OccupationService->getOccupationById($id); // Get the user or throw 404 if not found
             // If the request is GET, display the user details with the edit form
             return view('admin.occupations.edit', compact('occupation'));
         }
@@ -71,7 +73,7 @@ class OccupationController extends Controller
 
         $validated['id'] = $request->input('id');
         // Retrieve the edit of user from the UserService
-        $occupation = $this->occupationService->EditOccupation($validated);
+        $occupation = $this->OccupationService->EditOccupation($validated);
         if ($occupation) {
             // Redirect back to the user details page with a success message
             session()->flash('success', 'Occupation details updated successfully.');
