@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\DocumentationController;
 use App\Http\Controllers\admin\OccupationController;
+use App\Http\Controllers\admin\TermPolicyController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\TestController;
 use App\Http\Middleware\CheckLoggedIn;
@@ -42,9 +43,9 @@ Route::middleware([CheckLoggedIn::class])->group(function () {
 
 
         // terms-policy start
-        Route::get('/terms-policy', [DocumentationController::class, 'index'])->name('admin.terms-policy')->middleware(CheckPermission::class.':list,Documentation');
-        Route::match(['get', 'post'], '/add-documentation', [DocumentationController::class, 'CreateDocumentation'])->name('admin.add-documentation')->middleware(CheckPermission::class.':create,Documentation');
-        Route::match(['get', 'post'], '/edit-documentation/{id?}', [DocumentationController::class, 'EditDocumentation'])->name('admin.edit-documentation')->middleware(CheckPermission::class.':edit,Documentation');
+        Route::get('/terms-policy', [TermPolicyController::class, 'index'])->name('admin.terms-policy')->middleware(CheckPermission::class.':list,Documentation');
+        Route::match(['get', 'post'], '/add-terms-policy', [TermPolicyController::class, 'CreateTermsPolicy'])->name('admin.add-terms-policy')->middleware(CheckPermission::class.':create,Documentation');
+        Route::match(['get', 'post'], '/edit-terms-policy/{id?}', [TermPolicyController::class, 'EditTermsPolicy'])->name('admin.edit-terms-policy')->middleware(CheckPermission::class.':edit,Documentation');
         //terms-policy end
 
 
