@@ -14,6 +14,12 @@ return [
         "edit"=>"Edit",
         "delete"=>"Delete"
     ],
+    'documentations' => [
+        "list"=>"List",
+        "create"=>"Create",
+        "edit"=>"Edit",
+        "delete"=>"Delete"
+    ],
     'states' => [
         "list"=>"List",
         "create"=>"Create",

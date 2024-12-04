@@ -55,10 +55,11 @@
                                         <tr>
                                             <td>{{$documentation->name}}</td>
                                             <td>{{$documentation->description}}</td>
-                                            <td>{{$documentation->mandatory}}</td>
+                                            <td>@if($documentation->mandatory==1) Yes @else No @endif</td>
+
                                             <td>@if($documentation->status==1) Active @else Deactive @endif</td>
                                             <td>{{$documentation->created_at}}</td>
-                                            <td> <a href="{{route('admin.edit-occupation',Crypt::encrypt($occupation->id))}}">
+                                            <td> <a href="{{route('admin.edit-documentation',Crypt::encrypt($documentation->id))}}">
                                                     <i class="fa fa-edit"></i>
                                                 </a></td>
                                         </tr>

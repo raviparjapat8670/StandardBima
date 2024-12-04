@@ -64,12 +64,13 @@ class UserController extends Controller
     // Show user details or edit the user
     public function EditUser(EditUserRequest $request, $id)
     {
-        if ($request->isMethod('get')) {
-            // Decrypt the ID
-            if (empty($id))
-                return redirect()->route('admin.users');
+         // Decrypt the ID
+         if (empty($id))
+         return redirect()->route('admin.users');
 
-            $id = Crypt::decrypt($id);
+         $id = Crypt::decrypt($id);
+
+        if ($request->isMethod('get')) {
             $permissions = config('permissions');
             $user = $this->UserService->getUserById($id); // Get the user or throw 404 if not found
             $user->permission = json_decode($user->permission);
@@ -78,7 +79,7 @@ class UserController extends Controller
         }
 
         // If the request is POST, update the user details
-        $validated = $request->validated(); // Manually validate on POST request
+        $validated = $id; // Manually validate on POST request
         // Update the user
 
         $validated['id'] = $request->input('id');

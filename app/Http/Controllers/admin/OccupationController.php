@@ -25,7 +25,7 @@ class OccupationController extends Controller
     }
     public function index(GetOccupationRequest $request)
     {
-    
+
         $validated = $request->validated();
         // Retrieve the list of users from the UserService
         $occupations = $this->OccupationService->getOccupations($validated);
@@ -55,20 +55,21 @@ class OccupationController extends Controller
     // Show Occupation details or edit the Occupation
     public function EditOccupation(EditOccupationRequest $request, $id)
     {
-        if ($request->isMethod('get')) {
-
-            if (empty($id))
+        if (empty($id))
             return redirect()->route('admin.occupations');
 
+        $id = Crypt::decrypt($id);
+
+        if ($request->isMethod('get')) {
             // Decrypt the ID
-            $id = Crypt::decrypt($id);
+
             $occupation = $this->OccupationService->getOccupationById($id); // Get the user or throw 404 if not found
             // If the request is GET, display the user details with the edit form
             return view('admin.occupations.edit', compact('occupation'));
         }
 
         // If the request is POST, update the user details
-        $validated = $request->validated(); // Manually validate on POST request
+        $validated = $id; // Manually validate on POST request
         // Update the user
 
         $validated['id'] = $request->input('id');

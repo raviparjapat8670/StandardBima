@@ -59,7 +59,9 @@
                 </li>
                 <li><a href="{{route('admin.occupations')}}"><i class="fa fa-money"></i> Occupations</a>
                 </li>
-                <li><a href="{{route('admin.documentations')}}"><i class="fa fa-money"></i> Documentations</a>
+                <li><a href="{{route('admin.documentations')}}"><i class="fa fa-envelope"></i>KYC Documentations</a>
+                </li>
+                <li><a href="{{route('admin.terms-policy')}}"><i class="fa fa-file"></i>T&C / Privacy Policy</a>
                 </li>
                
                 <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>

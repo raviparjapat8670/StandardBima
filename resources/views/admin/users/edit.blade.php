@@ -12,11 +12,10 @@
 
         <div class="x_content">
             <br />
-            <form class="form-label-left input_mask" method="POST" action="{{ route('admin.edit-user', $user->id) }}">
+            <form class="form-label-left input_mask" method="POST" action="{{ route('admin.edit-user', Crypt::encrypt($user->id)) }}">
                 @csrf <!-- CSRF token for security -->
                 <div class="col-md-6 col-sm-6  form-group has-feedback">
                     <input type="text" class="form-control has-feedback-left" id="inputSuccess2" name="fname" value="{{ old('fname', $user->fname) }}" placeholder="First Name">
-                    <input type="hidden" name="id" value="{{$user->id}}">
 
                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                     @error('fname')
@@ -79,7 +78,7 @@
 
                         @foreach ($permissions as $key=>$permission)
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
 
                             <div class="card-body">
                                 <h6 style="text-align:left;">

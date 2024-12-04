@@ -41,6 +41,11 @@ Route::middleware([CheckLoggedIn::class])->group(function () {
         //documentation end
 
 
+        // terms-policy start
+        Route::get('/terms-policy', [DocumentationController::class, 'index'])->name('admin.terms-policy')->middleware(CheckPermission::class.':list,Documentation');
+        Route::match(['get', 'post'], '/add-documentation', [DocumentationController::class, 'CreateDocumentation'])->name('admin.add-documentation')->middleware(CheckPermission::class.':create,Documentation');
+        Route::match(['get', 'post'], '/edit-documentation/{id?}', [DocumentationController::class, 'EditDocumentation'])->name('admin.edit-documentation')->middleware(CheckPermission::class.':edit,Documentation');
+        //terms-policy end
 
 
     });
